@@ -6,20 +6,21 @@ import LinkPost from "./LinkPost";
 
 export default function PostList({ posts }) {
   return (
-    <div>
+    <div className="PostList">
       {posts.map(post => {
         if (post.data.is_video) {
-          return <VideoPost post={post.data} />;
+          return <VideoPost key={post.data.id} post={post.data} />;
         } else if (post.data.post_hint === "link") {
-          return <LinkPost post={post.data} />;
+          return <LinkPost key={post.data.id} post={post.data} />;
         } else if (
           post.data.url.endsWith(".jpg") ||
-          post.data.url.endsWith(".gifv")
+          post.data.url.endsWith(".gifv") ||
+          post.data.url.endsWith(".png")
         ) {
-          return <ImagePost post={post.data} />;
+          return <ImagePost key={post.data.id} post={post.data} />;
         }
 
-        return <SimplePost post={post.data} />;
+        return <SimplePost key={post.data.id} post={post.data} />;
       })}
     </div>
   );
